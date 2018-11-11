@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>CoBoard 1.0</title>
+	<meta name="content-type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/bootstrap/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/styles.css"
+		rel="stylesheet" />
+	<link REL="SHORTCUT ICON"
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icono.png" />
+
+</h:head>
+<h:body class="login-bg">
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12" align="center">
+					<p:graphicImage
+						value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/logocb.png" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<h:form styleClass="form-signin" id="form">
+		<p:growl id="msg" showDetail="true" />
+		<div class="page-content container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="login-wrapper">
+						<div class="box">
+							<div class="content-wrap">
+								<h2>Registro de usuario</h2>
+								<div align="center">
+
+									<p:panel id="panelUsuario" style="border:0px;">
+										<p:inputText id="txtNombre" binding="#{usuarioView.txtNombre}"
+											placeholder="Nombre completo" required="true"/>
+										
+										<p:inputText id="txtCorreo" binding="#{usuarioView.txtCorreo}"
+											placeholder="Correo electronico" required="true"/>
+
+										<BR />
+										<h:outputText id="msgIdcargo_Cargo" value="Cargo:" />
+										<BR />
+										<p:selectOneMenu id="Cargo" binding="#{usuarioView.somCargo}" lazy="true">
+											<f:selectItems value="#{usuarioView.losCargosSelectItem}" />
+										</p:selectOneMenu>
+									</p:panel>
+								</div>
+								<BR />
+								<p:panel id="panelBotones" style="border:0px;">
+									<div align="center">
+										<p:commandButton id="btnSave" binding="#{usuarioView.btnSave}"
+											value="Registrarse"
+											action="#{usuarioView.registrarUsuario}" update="form"/>
+										<p:commandButton id="btnClear" value="Limpiar"
+											action="#{usuarioView.limpiar}" update="form" />
+									</div>
+								</p:panel>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</h:form>
+
+</h:body>
+
+</html>

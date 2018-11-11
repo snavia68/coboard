@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templateAdm.xhtml">
+
+	<ui:define name="content">
+
+		<h:form id="form">
+
+
+			<div align="center">
+				<p:panel header="Listado de Proyectos Disponibles">
+					<p:dataTable id="dataProyectos"
+						value="#{proyectousuarioView.listaProyectos}" var="listaProyectos"
+						paginator="true" rows="8" widgetVar="tablaProyectosUsuario"
+						emptyMessage="No hay proyectos con esa búsqueda."
+						filteredValue="#{proyectousuarioView.proyectosUsuarioFiltrados}">
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Digite su búsqueda:" />
+								<p:inputText id="globalFilter"
+									onkeyup="PF('tablaProyectosUsuario').filter()"
+									style="width:150px" placeholder="Palabra(s) clave(s)" />
+							</p:outputPanel>
+						</f:facet>
+
+						<p:column headerText="Nombre del Proyecto"
+							filterBy="#{proyectos.nombre}" style="width:120px"
+							filterMatchMode="contains">
+							<div align="center">
+								<p:outputLabel value="#{proyectos.nombre}" />
+							</div>
+						</p:column>
+
+						<p:column headerText="Fecha Inicio"
+							filterBy="#{proyectos.fechainicio}">
+							<div align="center">
+								<p:outputLabel value="#{proyectos.fechainicio}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+								</p:outputLabel>
+							</div>
+						</p:column>
+
+						<p:column headerText="Fecha Fin" filterBy="#{proyectos.fechafin}">
+							<div align="center">
+								<p:outputLabel value="#{proyectos.fechafin}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+								</p:outputLabel>
+							</div>
+						</p:column>
+
+						<p:column headerText="Acciones">
+							<div align="center">
+								<p:commandButton action="#{proyectoView.editarProyecto}"
+									 title="Editar" icon="fa fa-pencil" style="color:white;">
+									<f:setPropertyActionListener value="#{proyectos}"
+										target="#{proyectoView.losProyectosEdita}" />
+								</p:commandButton>
+							</div>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</div>
+			<p:messages id="msg" showDetail="true" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

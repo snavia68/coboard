@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>CoBoard 1.0</title>
+	<meta name="content-type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/bootstrap/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/styles.css"
+		rel="stylesheet" />
+	<link REL="SHORTCUT ICON"
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icono.png" />
+
+</h:head>
+<h:body class="login-bg">
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12" align="center">
+					<div class="col-md-4 col-sm-3" style="padding-right: 11%">
+						<h:form>
+							<p:menuButton icon="fa fa-list-ul" style="margin-top: 30px;">
+								<p:menuitem value="Mi perfil" icon="fa fa-user" />
+								<p:menuitem value="Cambiar contraseña" icon="fa fa-exchange" />
+								<p:menuitem value="Vista de Proyectos" icon="fa fa-exchange" url="/vistaProyectos.xhtml" />
+								<p:menuitem value="Lista de Proyectos" icon="fa fa-exchange" url="/listadoProyectosView.xhtml" />
+								<p:separator />
+								<p:menuitem value="Desconectarse" icon="fa fa-close"
+									action="#{inicioView.logOut}" />
+							</p:menuButton>
+							<p:outputLabel value="#{inicioView.usuario}"
+								style="margin-top: 30px;" />
+						</h:form>
+					</div>
+					<div class="col-md-4 col-sm-6" align="center">
+						<p:graphicImage
+							value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/logocb.png" />
+
+					</div>
+					<div class="col-md-4 col-sm-3" align="center"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<h:form styleClass="form-signin" id="form">
+		<p:growl id="msg" showDetail="true" />
+		<div class="page-content container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<div class="login-wrapper">
+						<div class="box">
+							<div class="content-wrap">
+								<div align="center">
+									<p:panel header="Listado de Proyectos">
+										<div align="right">
+											<p:commandButton id="crearProyecto" value="Nuevo Proyecto"
+												action="gestionProyectos.xhtml" style="font-weight:bold" />
+										</div>
+										<p:dataTable id="dataProyectos"
+											value="#{proyectoView.losProyectos}" var="proyectos"
+											paginator="true" rows="8" widgetVar="tablaProyectos"
+											emptyMessage="No hay proyectos con esa búsqueda."
+											filteredValue="#{proyectoView.proyectosFiltrados}">
+
+											<f:facet name="header">
+												<p:outputPanel>
+													<h:outputText value="Digite su búsqueda:" />
+													<p:inputText id="globalFilter"
+														onkeyup="PF('tablaProyectos').filter()"
+														style="width:150px" placeholder="Palabra(s) clave(s)" />
+												</p:outputPanel>
+											</f:facet>
+
+											<p:column headerText="Nombre del Proyecto"
+												filterBy="#{proyectos.nombre}" style="width:120px"
+												filterMatchMode="contains">
+												<div align="center">
+													<p:outputLabel value="#{proyectos.nombre}" />
+												</div>
+											</p:column>
+
+											<p:column headerText="Fecha Inicio"
+												filterBy="#{proyectos.fechainicio}">
+												<div align="center">
+													<p:outputLabel value="#{proyectos.fechainicio}">
+														<f:convertDateTime pattern="yyyy-MM-dd" />
+													</p:outputLabel>
+												</div>
+											</p:column>
+
+											<p:column headerText="Fecha Fin"
+												filterBy="#{proyectos.fechafin}">
+												<div align="center">
+													<p:outputLabel value="#{proyectos.fechafin}">
+														<f:convertDateTime pattern="yyyy-MM-dd" />
+													</p:outputLabel>
+												</div>
+											</p:column>
+
+											<p:column headerText="Acciones">
+												<div align="center">
+													<p:commandButton action="#{proyectoView.editarProyecto}"
+														class="ui-button" title="Editar" icon="ui-icon-pencil">
+														<f:setPropertyActionListener value="#{proyectos}"
+															target="#{proyectoView.losProyectosEdita}" />
+													</p:commandButton>
+												</div>
+											</p:column>
+										</p:dataTable>
+									</p:panel>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</h:form>
+
+</h:body>
+</html>

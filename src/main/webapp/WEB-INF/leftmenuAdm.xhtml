@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ps="http://primefaces.org/sentinel"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div id="layout-menubar" class="Unselectable fontRegular">
+		<div class="layout-menubarinner-box" id="buttonArea">
+			<a href="#" id="layout-menubar-resize" class="BordRad3"
+				title="Menu Resize"><i class="icon-th-list-2"></i></a> <a href="#"
+				id="layout-menubar-resize2" class="BordRad3" title="Open Menu"><i
+				class="icon-menu"></i></a>
+		</div>
+
+		<div class="layout-menubarinner-box" id="searchArea">
+			<i class="icon-user floatLeft" style="color: #27AAE1;"></i>
+			<input type="text" class="layout-menubar-search floatLeft Animated05" readonly="readonly" value="#{inicioView.usuario}" style="color: white;"/>
+		</div>
+		<h:form id="menuform">
+			<ps:menu id="sm_leftmenu">
+				<p:menuitem id="sm_proyectos" value="Proyectos" icon="icon-cube"
+					containerStyleClass="layout-menubar-active" url="vistaProyectos.xhtml">
+				</p:menuitem>
+				<p:menuitem value="Reporte votos por proyecto" icon="fa fa-exchange" url="/listadoProyectosView.xhtml" >
+				</p:menuitem>
+				<p:menuitem id="sm_logout" value="Cerrar Sesión" icon="icon-logout" url="../coboard/index.xhtml">
+				</p:menuitem>
+				<p:menuitem id="sm_otro" value="Otro" icon="icon-bomb">
+				</p:menuitem>
+			</ps:menu>
+		</h:form>
+	</div>
+
+</ui:composition>

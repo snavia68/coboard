@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form">
+
+
+
+			<div align="center">
+				<h2>Cambio de contraseña</h2>
+				<div class="EmptyBox20"></div>
+				<p:outputLabel value="Ingrese la contraseña actual de su cuenta." />
+				<div class="EmptyBox10"></div>
+				<p:password id="contraActual"
+					binding="#{usuarioView.txtContrasenaActual}"
+					placeholder="Contraseña actual" required="true"
+					label="Contraseña actual" />
+
+				<div class="EmptyBox20"></div>
+
+				<p:outputLabel value="Ingrese una nueva contraseña para su cuenta." />
+				<div class="EmptyBox10"></div>
+
+				<p:password id="txtContrasena" feedback="true" inline="true"
+					binding="#{usuarioView.txtContrasena}"
+					placeholder="Contraseña nueva" required="true"
+					label="Contraseña nueva" match="txtContrasena2" />
+				<div class="EmptyBox10"></div>
+				<p:password id="txtContrasena2" placeholder="Repita su contraseña"
+					required="true" label="Re contraseña nueva" />
+				<div class="EmptyBox30"></div>
+				<p:commandButton value="Modificar"
+					actionListener="#{usuarioView.cambiarContra}" update="msgGrowl"
+					oncomplete="/index.xhtml" style="width:21% !Important;"/>
+					<div class="EmptyBox30"></div>
+			</div>
+
+			<p:messages id="msgGrowl" autoUpdate="true" showDetail="true" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

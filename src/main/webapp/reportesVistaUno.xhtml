@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form">
+
+
+
+			<div align="center">
+				<h2>Mis votos por proyecto</h2>
+
+				<div class="EmptyBox10"></div>
+
+				<p:selectOneMenu id="somProyectos"
+					binding="#{reporteUnoView.somProyectos}">
+					<f:selectItems value="#{reporteUnoView.losProyectosSelectItem}" />
+				</p:selectOneMenu>
+				<div class="EmptyBox10"></div>
+				<p:commandButton value="Buscar" update="form"
+					actionListener="#{reporteUnoView.misVotos}" />
+
+				<div class="EmptyBox10"></div>
+				<h:panelGroup rendered="#{!reporteUnoView.descargas}">
+					<h:commandLink>
+						<p:graphicImage name="images/excel.png" library="sentinel-layout"/>
+						<p:dataExporter type="xls" target="tbl" fileName="votosProyecto_#{reporteUnoView.proyecto}"
+							pageOnly="true" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage name="images/pdf (1).png" library="sentinel-layout"/>
+						<p:dataExporter type="pdf" target="tbl" fileName="votosProyecto_#{reporteUnoView.proyecto}"
+							pageOnly="true" preProcessor="#{reporteUnoView.preProcessPDF}"/>
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage name="images/csv (1).png" library="sentinel-layout"/>
+						<p:dataExporter type="csv" target="tbl" fileName="votosProyecto_#{reporteUnoView.proyecto}"
+							pageOnly="true" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage name="images/xml (1).png" library="sentinel-layout"/>
+						<p:dataExporter type="xml" target="tbl" fileName="votosProyecto_#{reporteUnoView.proyecto}"
+							pageOnly="true" encoding=""/>
+					</h:commandLink>
+
+					<p:dataTable id="tbl" var="voto" value="#{reporteUnoView.losvotos}"
+						paginator="true" rows="5">
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Informacion" />
+							</f:facet>
+							<h:outputText value="#{voto.descripcionInformacion}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Voto" />
+							</f:facet>
+							<h:outputText value="#{voto.votosRealizados}" />
+							
+						</p:column>
+
+					</p:dataTable>
+				</h:panelGroup>
+			</div>
+
+			<p:messages id="msgGrowl" autoUpdate="true" showDetail="true" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

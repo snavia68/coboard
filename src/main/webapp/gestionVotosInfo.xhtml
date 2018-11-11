@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<h:form styleClass="form-signin" id="form">
+
+			<div class="EmptyBox10"></div>
+			<div align="center">
+				<h2>Votación de variables</h2>
+			</div>
+
+			<div class="EmptyBox20"></div>
+			<h:panelGrid columns="3">
+				<div align="center">
+					<p:panel header="Votación del Proyecto">
+						<p:dataTable id="dataVotacionProyectos"
+							value="#{informacionView.lasVariables}" var="informacion"
+							widgetVar="tablaVotaProyectos">
+
+
+							<p:column headerText="Información a Considerar">
+								<div align="center">
+									<p:outputLabel value="#{informacion.descripcion}" />
+								</div>
+							</p:column>
+
+							<p:column headerText="Mi voto" style="width:120px">
+								<div align="center">
+
+									<p:commandButton id="btnDeAcuerdo" class="ui-button"
+										title="De acuerdo" binding="#{votosView.btnDeAcuerdo}"
+										action="#{votosView.deAcuerdo}" icon="fa fa-thumbs-up"
+										style="color:white;" update="form">
+										<f:setPropertyActionListener value="#{informacion}"
+											target="#{votosView.informacion}" />
+									</p:commandButton>
+
+									<p:commandButton id="btnDesacuerdo" class="ui-button"
+										title="En desacuerdo" binding="#{votosView.btnDesacuerdo}"
+										action="#{votosView.desacuerdo}" icon="fa fa-thumbs-down"
+										style="color:white;" update="form">
+										<f:setPropertyActionListener value="#{informacion}"
+											target="#{votosView.informacion}" />
+									</p:commandButton>
+
+								</div>
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+					<p:panel header="Consenso de votaciones">
+
+						<p:dataTable id="consensoDt" value="#{proyectoView.losVotos}"
+							var="voto">
+
+							<p:column headerText="Variable">
+								<p:outputLabel value="#{voto.descripcionInformacion}" />
+							</p:column>
+
+							<p:columns var="votoUsuario" value="#{proyectoView.losUsuarios}"
+								columnIndexVar="colIndex">
+								<f:facet name="header">
+									<h:outputText value="#{votoUsuario}" />
+								</f:facet>
+
+								<p:column headerText="Variable">
+									<div align="center">
+										<p:outputLabel
+											rendered="#{voto.listaVotosUsuarios[colIndex][1] eq 'Desacuerdo'}"
+											title="En desacuerdo" style="color:red;">
+											<i class="fa fa-thumbs-down fa-2x" />
+										</p:outputLabel>
+										<p:outputLabel
+											rendered="#{voto.listaVotosUsuarios[colIndex][1] eq 'Acuerdo'}"
+											title="De acuerdo" style="color:green;">
+											<i class="fa fa-thumbs-up fa-2x" />
+										</p:outputLabel>
+									</div>
+								</p:column>
+							</p:columns>
+
+						</p:dataTable>
+						<p:poll interval="2" update="consensoDt" />
+					</p:panel>
+
+				</div>
+				
+			</h:panelGrid>
+			<p:messages id="msg" showDetail="true" />
+			<p:growl id="msgGrowl" showDetail="false" />
+			<div align="center">
+				<p:fieldset legend="CoBoard Social" toggleable="true"
+					toggleSpeed="500" collapsed="true">
+
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:panel header="Usuarios activos">
+							<p:dataList id="usersOnline"
+								value="#{proyectoView.usuariosOnline}" var="usus" type="ordered"
+								itemType="none">
+								<i class="fa fa-circle" />
+       							 #{usus.nombre}
+    						</p:dataList>
+						</p:panel>
+						<p:panel header="CoBoard Chat">
+
+						</p:panel>
+					</h:panelGrid>
+				</p:fieldset>
+			</div>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

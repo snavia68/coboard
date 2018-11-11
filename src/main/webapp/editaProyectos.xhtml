@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templateAdm.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form">
+
+
+			<div align="center">
+				<p:tabMenu activeIndex="0">
+					<p:menuitem value="Información de proyecto"
+						url="editaProyectos.xhtml" icon="fa fa-archive">
+						<f:param name="i" value="0" />
+					</p:menuitem>
+					<p:menuitem value="Asignación de variables"
+						url="gestionVariables.xhtml" icon="fa fa-puzzle-piece">
+						<f:param name="i" value="1" />
+					</p:menuitem>
+					<p:menuitem value="Asignación de usuarios"
+						url="asignarUsuarios.xhtml" icon="fa fa-user">
+						<f:param name="i" value="2" />
+					</p:menuitem>
+				</p:tabMenu>
+			</div>
+
+
+			<div align="center">
+				<h2>Editar Información del Proyecto</h2>
+				<p:panelGrid id="panelProyecto" columns="2" style="border:0px;">
+					<p:outputLabel value="Nombre de Proyecto" />
+					<p:inputText id="txtNombre" value="#{editaProyectoView.txtNombre}"
+						placeholder=" Ej. CoBoard" />
+
+					<p:outputLabel value="Número de Variables" />
+					<p:inputNumber id="txtMinimopreguntas"
+						value="#{editaProyectoView.txtMinimopreguntas}"
+						placeholder="Mínimo 1" />
+
+					<p:outputLabel value="Grado de Aceptación" />
+					<p:inputNumber id="txtPorcentajefiltro"
+						value="#{editaProyectoView.txtPorcentajefiltro}"
+						placeholder="En porcentaje. Ej. 10" />
+
+					<p:outputLabel value="Seleccione una Fecha Inicio" />
+					<p:calendar id="txtFechainicio"
+						value="#{editaProyectoView.txtFechainicio}" showOn="button"
+						placeholder="Fecha Inicio" />
+
+					<p:outputLabel value="Seleccione una Fecha Fin" />
+					<p:calendar id="txtFechafin"
+						value="#{editaProyectoView.txtFechafin}" showOn="button"
+						placeholder="Fecha Fin" />
+
+					<p:outputLabel value="Estado Activo" />
+					<p:selectOneMenu id="somActiva"
+						binding="#{editaProyectoView.somActiva}">
+						<f:selectItem itemValue="S" itemLabel="SI" />
+						<f:selectItem itemValue="N" itemLabel="NO" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Descripción" />
+					<p:inputTextarea id="txtDescripcion" rows="5" cols="31"
+						value="#{editaProyectoView.txtDescripcion}"
+						placeholder="Brinde una corta descripción del proyecto para que los demás puedan verla." />
+				</p:panelGrid>
+			</div>
+			<BR />
+			<p:panel id="panelBotones" style="border:0px;">
+				<div align="center">
+					<p:commandButton id="btnSave"
+						binding="#{editaProyectoView.btnSave}" value="Modificar"
+						action="#{editaProyectoView.actualizarProyecto}" update="form" />
+
+					<p:commandButton id="btnClear" value="Limpiar"
+						action="#{editaProyectoView.limpiar}" update="form" />
+				</div>
+			</p:panel>
+			<p:messages id="msg" showDetail="true" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,143 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templateAdm.xhtml">
+
+	<ui:define name="content">
+
+		<h:form id="form" enctype="multipart/form-data">
+
+
+			<div align="center">
+				<p:tabMenu activeIndex="1">
+					<p:menuitem value="Información de proyecto"
+						url="editaProyectos.xhtml" icon="fa fa-archive">
+						<f:param name="i" value="0" />
+					</p:menuitem>
+					<p:menuitem value="Asignación de variables"
+						url="gestionVariables.xhtml" icon="fa fa-puzzle-piece">
+						<f:param name="i" value="1" />
+					</p:menuitem>
+					<p:menuitem value="Asignación de usuarios"
+						url="asignarUsuarios.xhtml" icon="fa fa-user">
+						<f:param name="i" value="2" />
+					</p:menuitem>
+				</p:tabMenu>
+			</div>
+
+
+			<div align="center">
+				<h2>Creación de variables</h2>
+				<p:panel id="panelProyecto" style="border:0px;">
+
+
+					<p:inputText id="txtDescripción"
+						binding="#{variablesView.txtDescripcion}"
+						placeholder="Nombre de la variable"
+						style="width:220px; height:30px;" />
+					<br />
+					<p:selectOneMenu id="somActivo"
+						binding="#{variablesView.somActivo}" style="width:220px;">
+						<f:selectItem itemValue="#{null}" itemLabel="-------------------" />
+						<f:selectItem itemValue="S" itemLabel="SI" />
+						<f:selectItem itemValue="N" itemLabel="NO" />
+					</p:selectOneMenu>
+					<p:growl id="messages" showDetail="true" />
+					<br />
+					<p:fileUpload value="#{variablesView.file}" mode="simple"
+						skinSimple="true" />
+					<br />
+					<p:outputLabel binding="#{variablesView.ruta}" />
+
+				</p:panel>
+			</div>
+			<p:panel id="panelBotones" style="border:0px;">
+				<div align="center">
+					<p:commandButton id="btnSave" binding="#{variablesView.btnSave}"
+						ajax="false" action="#{variablesView.action_create}" value="Crear"
+						update="form" />
+
+					<p:commandButton id="btnClear" value="Limpiar"
+						action="#{variablesView.limpiar()}" update="form" />
+
+					<p:commandButton id="btnModify" value="Modificar"
+						binding="#{variablesView.btnModify}"
+						action="#{variablesView.update_variable}" update="form"
+						ajax="false" />
+				</div>
+
+
+			</p:panel>
+
+			<p:panel id="panelTable" reflow="true">
+				<p:dataTable value="#{variablesView.lasVariables}" scrollable="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					var="variables" rows="5" paginator="true"
+					widgetVar="variablesTable"
+					emptyMessage="Variables no encontradas con el criterio de búsqueda"
+					filteredValue="#{variablesView.filteredVariables}">
+
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Buscar en todos los campos:" />
+							<p:inputText id="globalFilter"
+								onkeyup="PF('variablesTable').filter()"
+								placeholder="Ingrese criterios de búsqueda"
+								style="width:215px;height:30px;" />
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column headerText="Proyecto" filterMatchMode="exact"
+						filterBy="#{variables.proyecto.idproyecto}">
+						<f:facet name="filter">
+							<p:selectOneMenu onchange="PF('variablesTable').filter()">
+								<f:selectItem itemLabel="---Seleccione---" itemValue="#{null}"
+									noSelectionOption="true" />
+								<f:selectItems value="#{variablesView.losProyectosSelectItem}" />
+							</p:selectOneMenu>
+						</f:facet>
+						<p:outputLabel
+							value="#{variablesView.nombreProyecto(variables.proyecto.idproyecto)}" />
+					</p:column>
+
+					<p:column headerText="Código" filterBy="#{variables.idinformacion}"
+						filterMatchMode="contains">
+						<p:outputLabel value="#{variables.idinformacion}" />
+					</p:column>
+
+
+
+					<p:column headerText="Descripción"
+						filterBy="#{variables.descripcion}" filterMatchMode="contains">
+						<p:outputLabel value="#{variables.descripcion}" />
+					</p:column>
+
+					<p:column headerText="Fecha de creación"
+						style="text-align: center;">
+						<p:outputLabel value="#{variables.fechacreacion}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Opciones" style="text-align: center;">
+
+						<p:commandButton title="Editar"
+							action="#{variablesView.verAction}" icon="fa fa-pencil" style="color:white;"
+							update="form" 
+							align="center">
+							<f:setPropertyActionListener value="#{variables}"
+								target="#{variablesView.variableSelected}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+
+			<p:messages id="msg" showDetail="true" />
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

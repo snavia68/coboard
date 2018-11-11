@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templateAdm.xhtml">
+
+	<ui:define name="content">
+
+		<h:form sid="form">
+			<p:growl id="msg" showDetail="true" />
+
+			<div align="center">
+				<p:panel header="Listado de Proyectos">
+					<div align="right">
+						<p:commandButton id="crearProyecto" value="Nuevo Proyecto"
+							action="gestionProyectos.xhtml" style="font-weight:bold" />
+					</div>
+					<p:dataTable id="dataProyectos"
+						value="#{proyectoView.losProyectos}" var="proyectos"
+						paginator="true" rows="8" widgetVar="tablaProyectos"
+						emptyMessage="No hay proyectos con esa búsqueda."
+						filteredValue="#{proyectoView.proyectosFiltrados}">
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Digite su búsqueda:" />
+								<p:inputText id="globalFilter"
+									onkeyup="PF('tablaProyectos').filter()" style="width:150px"
+									placeholder="Palabra(s) clave(s)" />
+							</p:outputPanel>
+						</f:facet>
+
+						<p:column headerText="Nombre del Proyecto"
+							filterBy="#{proyectos.nombre}" style="width:120px"
+							filterMatchMode="contains">
+							<div align="center">
+								<p:outputLabel value="#{proyectos.nombre}" />
+							</div>
+						</p:column>
+
+						<p:column headerText="Fecha Inicio"
+							filterBy="#{proyectos.fechainicio}">
+							<div align="center">
+								<p:outputLabel value="#{proyectos.fechainicio}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+								</p:outputLabel>
+							</div>
+						</p:column>
+
+						<p:column headerText="Fecha Fin" filterBy="#{proyectos.fechafin}">
+							<div align="center">
+								<p:outputLabel value="#{proyectos.fechafin}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+								</p:outputLabel>
+							</div>
+						</p:column>
+
+						<p:column headerText="Acciones">
+							<div align="center">
+								<p:commandButton action="#{proyectoView.editarProyecto}"
+									 title="Editar" icon="fa fa-pencil" style="color:white;">
+									<f:setPropertyActionListener value="#{proyectos}"
+										target="#{proyectoView.losProyectosEdita}" />
+								</p:commandButton>
+							</div>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

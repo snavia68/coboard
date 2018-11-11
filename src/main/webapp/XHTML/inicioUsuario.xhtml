@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form">
+
+			<div align="center">
+				<p:panel header="Proyectos en los que participo">
+					<p:dataTable id="dataProyectos" value="#{inicioView.losProyectos}"
+						var="proyectos" paginator="true" rows="8"
+						widgetVar="tablaProyectos"
+						emptyMessage="No tienes proyectos asignados."
+						filteredValue="#{proyectoView.proyectosFiltrados}">
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Digite su búsqueda:" />
+								<p:inputText id="globalFilter"
+									onkeyup="PF('tablaProyectos').filter()"
+									style="width:215px;height:30px;"
+									placeholder="Palabra(s) clave(s)" />
+							</p:outputPanel>
+						</f:facet>
+
+						<p:column headerText="Nombre del Proyecto"
+							filterBy="#{proyectos.nombre}" style="width:120px"
+							filterMatchMode="contains">
+							<div align="center">
+								<p:outputLabel value="#{proyectos.nombre}" />
+							</div>
+						</p:column>
+
+						<p:column headerText="Fecha Inicio"
+							filterBy="#{proyectos.fechainicio}">
+							<div align="center">
+								<p:outputLabel value="#{proyectos.fechainicio}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+								</p:outputLabel>
+							</div>
+						</p:column>
+
+						<p:column headerText="Fecha Fin" filterBy="#{proyectos.fechafin}">
+							<div align="center">
+								<p:outputLabel value="#{proyectos.fechafin}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+								</p:outputLabel>
+							</div>
+						</p:column>
+
+						<p:column headerText="Cantidad de Preguntas"
+							filterBy="#{proyectos.minimopreguntas}">
+							<div align="center">
+								<p:outputLabel value="#{proyectos.minimopreguntas}" />
+							</div>
+						</p:column>
+
+						<p:column headerText="Descripción Proyecto"
+							filterBy="#{proyectos.descripcion}">
+							<div align="center">
+								<p:outputLabel value="#{proyectos.descripcion}" />
+							</div>
+						</p:column>
+
+						<p:column headerText="Estado del Proyecto"
+							filterBy="#{proyectos.activo}">
+							<div align="center">
+								<p:outputLabel
+									value="#{(proyectos.activo).toString() == 'S' ? 'Activo':'Inactivo'}" />
+							</div>
+						</p:column>
+
+						<p:column headerText="Votación">
+							<div align="center">
+								<p:commandButton action="#{inicioView.votarProyecto}"
+									class="ui-button" title="Votar" icon="fa fa-send" style="color:white;">
+									<f:setPropertyActionListener value="#{proyectos}"
+										target="#{inicioView.proyectoAVotar}" />
+								</p:commandButton>
+							</div>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</div>
+
+		</h:form>
+
+
+		<h:form styleClass="form-signin">
+			<p:messages id="msgGrowl" autoUpdate="true" showDetail="false" />
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

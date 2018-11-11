@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>CoBoard 1.0</title>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+	<h:outputScript name="js/login.js" library="sentinel-layout" />
+	<h:outputStylesheet name="css/font-icon-layout.css"
+		library="sentinel-layout" />
+	<h:outputStylesheet name="css/sentinel-layout.css"
+		library="sentinel-layout" />
+	<h:outputStylesheet name="css/core-layout.css"
+		library="sentinel-layout" />
+	<link REL="SHORTCUT ICON"
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icono.png" />
+</h:head>
+
+<h:body class="fontRegular login-back white-back">
+	<h:form id="form">
+
+		<div class="Container">
+			<div
+				class="Container80 MaxWid500 Fnone MarAuto TexAlCenter PaddingTopPercent10">
+				<a href="" id="login-logo"> <p:graphicImage
+						value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/logocb.png"
+						style="width: 118% !important; height: 80% !important;" />
+
+				</a>
+				<div class="EmptyBox10"></div>
+			</div>
+
+			<!-- LOGIN BOX COVER START -->
+			<div class="Container80 MaxWid500 white-back Fnone MarAuto BordRad10"
+				id="login-box">
+				<div class="Container">
+					<div
+						class="Container50 TexAlCenter Animated05 BoxSizeBorder TabBtn left TabBtnActiveLeft"
+						role="1">
+						<div class="Container80 Fnone MarAuto FontBold">
+							<i class="icon-lock"></i> Iniciar Sesión
+						</div>
+					</div>
+					<div
+						class="Container50 TexAlCenter Animated05 BoxSizeBorder TabBtn right"
+						role="2">
+						<div class="Container80 Fnone MarAuto FontBold">
+							<i class="icon-key-1"></i> Registrarse
+						</div>
+					</div>
+
+					<div
+						class="Container90 Fnone MarAuto TexAlCenter TabContent OvHidden"
+						id="TAB1">
+						<div class="EmptyBox50"></div>
+						<p:inputText id="usernameField" name="j_username"
+							value="#{loginView.userId}" placeholder="E-mail"
+							styleClass="Container80 Fnone MarAuto Fs18" />
+						<div class="EmptyBox10"></div>
+						<p:password id="passwordField" name="j_password"
+							value="#{loginView.password}" placeholder="Password"
+							feedback="false" styleClass="Container80 Fnone MarAuto Fs18" />
+						<div class="EmptyBox20"></div>
+						<div class="Container85 Fnone MarAuto softgray">
+							<p:selectBooleanCheckbox value="accept" styleClass="Fleft"
+								itemLabel="I Accept Terms And Policies" />
+						</div>
+						<div class="EmptyBox30"></div>
+						<p:commandButton value="Ingresar" action="#{loginView.login}"
+							styleClass="Fs16" update="msg2" />
+						<div class="EmptyBox10"></div>
+						<p:messages id="msg2" showDetail="true" />
+						<div class="EmptyBox50"></div>
+					</div>
+
+					<div
+						class="Container90 Fnone MarAuto DispNone TexAlCenter TabContent OvHidden"
+						id="TAB2">
+						<div class="EmptyBox50"></div>
+						<p:inputText id="txtNombre" binding="#{usuarioView.txtNombre}"
+							placeholder="Nombre completo"
+							styleClass="Container80 Fnone MarAuto Fs18" />
+						<div class="EmptyBox10"></div>
+						<p:inputText id="txtCorreo" binding="#{usuarioView.txtCorreo}"
+							placeholder="Correo electronico"
+							styleClass="Container80 Fnone MarAuto Fs18" />
+						<div class="EmptyBox10"></div>
+						<h:outputText id="msgIdcargo_Cargo" value="Cargo:" />
+						<div class="EmptyBox10"></div>
+						<p:selectOneMenu id="Cargo" binding="#{usuarioView.somCargo}"
+							lazy="true" style="width: 48% !important;">
+							<f:selectItems value="#{usuarioView.losCargosSelectItem}" />
+						</p:selectOneMenu>
+						<div class="EmptyBox20"></div>
+						<p:commandButton id="btnSave" binding="#{usuarioView.btnSave}"
+							value="Registrarse"
+							actionListener="#{usuarioView.registrarUsuario}" update="msg"
+							style="width: 40%;" />
+						<p:commandButton id="btnClear" value="Limpiar"
+							actionListener="#{usuarioView.limpiar}"
+							update="Cargo, txtCorreo, txtNombre" style="width: 40%;" />
+						<div class="EmptyBox10"></div>
+						<p:messages id="msg" showDetail="true" />
+						<div class="EmptyBox20"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- LOGIN BOX COVER END -->
+	</h:form>
+</h:body>
+
+</html>

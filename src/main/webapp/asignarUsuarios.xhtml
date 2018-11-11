@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templateAdm.xhtml">
+
+	<ui:define name="content">
+
+		<h:form id="form">
+
+			<div align="center">
+				<p:tabMenu activeIndex="2">
+					<p:menuitem value="Información de proyecto"
+						url="editaProyectos.xhtml" icon="fa fa-archive">
+						<f:param name="i" value="0" />
+					</p:menuitem>
+					<p:menuitem value="Asignación de variables"
+						url="gestionVariables.xhtml" icon="fa fa-puzzle-piece">
+						<f:param name="i" value="1" />
+					</p:menuitem>
+					<p:menuitem value="Asignación de usuarios"
+						url="asignarUsuarios.xhtml" icon="fa fa-user">
+						<f:param name="i" value="2" />
+					</p:menuitem>
+				</p:tabMenu>
+			</div>
+
+			<div align="center">
+				<h2>Asignación de usuarios</h2>
+				<p:outputLabel
+					value="Seleccione los usuarios que van a participar en el proyecto." />
+
+				<BR /> <BR /> <BR /> <BR /> <BR />
+				<h:panelGrid columns="2" style="text-align:center;">
+
+
+
+					<p:panel header="Usuarios disponibles">
+						<p:dataTable id="checkboxDT" var="usuario"
+							value="#{proyectousuarioView.usuario}"
+							selection="#{proyectousuarioView.usuarioSelected}"
+							rowKey="#{usuario.idusuario}" style="margin-bottom:0">
+
+							<p:column selectionMode="multiple"
+								style="width:18%;text-align:center" />
+							<p:column headerText="Nombre Usuario"
+								filterBy="#{usuario.nombre}" filterMatchMode="contains">
+								<h:outputText value="#{usuario.nombre}" />
+							</p:column>
+							<f:facet name="footer">
+								<p:commandButton process="checkboxDT" update="form"
+									icon="fa fa-key" style="color:white;" value="Vincular Usuarios"
+									actionListener="#{proyectousuarioView.asignarUsuarios()}" />
+							</f:facet>
+						</p:dataTable>
+					</p:panel>
+					<p:panel header="Usuarios en el proyecto">
+						<p:dataTable id="checkboxDT2" var="usuario"
+							value="#{proyectousuarioView.usuarioProyect}"
+							selection="#{proyectousuarioView.usuarioSelected2}"
+							rowKey="#{usuario.idusuario}" style="margin-bottom:0">
+
+							<p:column selectionMode="multiple"
+								style="width:18%;text-align:center" />
+							<p:column headerText="Nombre Usuario"
+								filterBy="#{usuario.nombre}" filterMatchMode="contains">
+								<h:outputText value="#{usuario.nombre}" />
+							</p:column>
+							<f:facet name="footer">
+								<p:commandButton process="checkboxDT2" update="form"
+									icon="fa fa-unlock" style="color:white;" value="Desvincular Usuarios"
+									actionListener="#{proyectousuarioView.desvincularUsuarios()}" />
+							</f:facet>
+						</p:dataTable>
+					</p:panel>
+				</h:panelGrid>
+
+			</div>
+			<p:messages id="msgGrowl" showDetail="true" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

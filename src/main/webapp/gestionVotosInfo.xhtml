@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
 
 	<ui:define name="content">
-		<h:form styleClass="form-signin" id="form">
+		<h:form styleClass="form-signin" id="form" enctype="multipart/form-data">
 
 			<div class="EmptyBox10"></div>
 			<div align="center">
@@ -32,11 +32,13 @@
 									
 									<p:commandButton id="btnDescargar" class="ui-button"
 										icon="fa fa-download"
+										ajax="false"
 										action="#{informacionView.descargarArchivos}"
 										style="color:white;" update="form"
-										>
+										>										
+										<p:fileDownload value="#{informacionView.file}" />	
 										<f:setPropertyActionListener value="#{informacion}"
-										target="#{informacionView.variableSelected}" />									
+										target="#{informacionView.variableSelected}" />								
 									</p:commandButton>
 								</div>
 							</p:column>
@@ -70,7 +72,7 @@
 							var="voto">
 
 							<p:column headerText="Variable">
-								<p:outputLabel value="#{voto.descripcionInformacion}" />
+								<p:outputLabel value="#{voto.descripcioninformacion}" />
 							</p:column>
 
 							<p:columns var="votoUsuario" value="#{proyectoView.losUsuarios}"

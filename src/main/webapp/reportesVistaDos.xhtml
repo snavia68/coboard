@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form">
+
+
+
+			<div align="center">
+				<h2>Reporte de sesiones</h2>
+
+				<div class="EmptyBox10"></div>
+				
+					<p:outputLabel value="Seleccione una Fecha Inicio" />
+						<p:calendar id="txtFechainicio"
+							value="" showOn="button"
+							placeholder="Fecha Inicio" />
+
+					<p:outputLabel value="Seleccione una Fecha Fin" />
+						<p:calendar id="txtFechafin"
+							value="" showOn="button"
+							placeholder="Fecha Fin" />
+				
+				<div class="EmptyBox10"></div>
+				<p:commandButton value="Buscar" update="form"
+					/>
+
+				<div class="EmptyBox10"></div>
+				<h:panelGroup rendered="">
+					
+
+					<h:commandLink ajax="false" title="Descargar PDF">
+						<p:graphicImage name="images/pdf (1).png" library="sentinel-layout"/>
+						
+					</h:commandLink>
+
+				</h:panelGroup>
+			</div>
+
+			<p:messages id="msgGrowl" autoUpdate="true" showDetail="true" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

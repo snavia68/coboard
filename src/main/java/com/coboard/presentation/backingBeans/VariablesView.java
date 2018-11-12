@@ -107,7 +107,7 @@ public class VariablesView implements Serializable  {
     	
     	//amazon 
     	
-    	businessDelegatorView.uploadPublicRead("coboard-cloud2",proyectoSes.getNombre()+"_"+usuario.getNombre()+file.getFileName()+"_",fileSubir);  
+    	businessDelegatorView.uploadPublicRead("coboard-cloud2",proyectoSes.getNombre()+"_"+usuario.getNombre()+"_"+file.getFileName(),fileSubir);  
     	
     	log.info("URL :"+businessDelegatorView.getUrl("coboard-cloud2", file.getFileName()));
     	log.info("URL : cliente/");
@@ -163,7 +163,7 @@ public class VariablesView implements Serializable  {
     			subirFileUpload();
     			
     			Adjuntos adjunto = new Adjuntos();
-        		adjunto.setUrl(proyecto.getNombre()+"_"+file.getFileName()+"_"+usuario.getNombre());
+        		adjunto.setUrl(proyectoSes.getNombre()+"_"+usuario.getNombre()+"_"+file.getFileName());
         		adjunto.setInformacion(variable);
         		adjunto.setUsuariocreador(usuario.getNombre());
         		adjunto.setFechacreacion(fecha);
@@ -207,7 +207,7 @@ public class VariablesView implements Serializable  {
     			
     			Adjuntos adjunto = businessDelegatorView.findAdjuntoByInformacion(variableSelected.getIdinformacion());
 
-        		adjunto.setUrl(proyectoSes.getNombre()+"_"+file.getFileName()+"_"+usuario.getNombre());
+        		adjunto.setUrl(proyectoSes.getNombre()+"_"+usuario.getNombre()+"_"+file.getFileName());
         		adjunto.setUsuariocreador(usuario.getNombre());
         		adjunto.setFechamodificacion(fecha);
         		ruta.resetValue();

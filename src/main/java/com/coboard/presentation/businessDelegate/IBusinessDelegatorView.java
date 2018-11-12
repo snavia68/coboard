@@ -319,9 +319,15 @@ public interface IBusinessDelegatorView {
 
     public List<VotosDTO> getDataVotos() throws Exception;
 
-    public void validateVotos(Votos votos) throws Exception;
+    public void validateVotos (Votos votos) throws Exception;
     
     public Votos existeVoto (Integer idinformacion, Integer idusuario);
+    
+    public Integer cantidadVotosVariables (Informacion informacion);
+    
+	public Integer cantidadVotosPorEstado (Votos votos);
+	
+	public Integer cantidadVotosTotalesPorVariable (Informacion informacion, Votos votos);
     
     public Usuario getUsuarioByEmail(String correo);
     

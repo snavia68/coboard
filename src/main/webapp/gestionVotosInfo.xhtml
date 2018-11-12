@@ -26,6 +26,20 @@
 									<p:outputLabel value="#{informacion.descripcion}" />
 								</div>
 							</p:column>
+							
+							<p:column headerText="Adjuntos">
+								<div align="center">
+									
+									<p:commandButton id="btnDescargar" class="ui-button"
+										icon="fa fa-download"
+										action="#{informacionView.descargarArchivos}"
+										style="color:white;" update="form"
+										>
+										<f:setPropertyActionListener value="#{informacion}"
+										target="#{informacionView.variableSelected}" />									
+									</p:commandButton>
+								</div>
+							</p:column>
 
 							<p:column headerText="Mi voto" style="width:120px">
 								<div align="center">

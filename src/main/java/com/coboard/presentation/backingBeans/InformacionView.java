@@ -228,7 +228,7 @@ public class InformacionView implements Serializable {
 	    	Adjuntos adjuntos = businessDelegatorView.findAdjuntoByInformacion(variableSelected.getIdinformacion());
 	    	InputStream fileConsulta = businessDelegatorView.download("coboard-cloud2", adjuntos.getUrl());
 			
-	    	file = new DefaultStreamedContent(fileConsulta, "","adjuntos.getUrl()");
+	    	file = new DefaultStreamedContent(fileConsulta, "",adjuntos.getUrl());
 	    	
 			FacesContext.getCurrentInstance().addMessage("",
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha descargado el archivo: "+adjuntos.getUrl(), ""));

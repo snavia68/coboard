@@ -1,6 +1,7 @@
 package com.coboard.dataaccess.dao;
 
 import com.coboard.dataaccess.api.JpaDaoImpl;
+import com.coboard.modelo.Informacion;
 import com.coboard.modelo.Proyecto;
 import com.coboard.modelo.Usuario;
 import com.coboard.modelo.Votos;
@@ -114,6 +115,27 @@ public class VotosDAO extends JpaDaoImpl<Votos, Integer> implements IVotosDAO {
 			log.error(e.getMessage(), e);
 			return null;
 		} 
+	}
+
+	@Override
+	public Integer cantidadVotosVariables(Informacion informacion) {
+		String jpql = "SELECT count(vo.idvoto) FROM votos vo WHERE vo.idinformacion =" + informacion.getIdinformacion();
+		Integer cantidad = (Integer)entityManager.createQuery(jpql).getSingleResult();
+		return cantidad;
+	}
+
+	@Override
+	public Integer cantidadVotosPorEstado(Votos votos) {
+		String jpql = "SELECT count(vo.idvoto) FROM votos vo WHERE vo.voto =" + votos.getVoto();
+		Integer cantidad = (Integer)entityManager.createQuery(jpql).getSingleResult();
+		return cantidad;
+	}
+
+	@Override
+	public Integer cantidadVotosTotalesPorVariable(Informacion informacion, Votos votos) {
+		String jpql = "SELECT count(vo.idvoto) FROM votos vo WHERE vo.idinformacion = " + informacion.getIdinformacion() + " AND vo.voto =" + votos.getVoto();
+		Integer cantidad = (Integer)entityManager.createQuery(jpql).getSingleResult();
+		return cantidad;
 	}
 	
 }

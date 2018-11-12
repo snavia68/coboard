@@ -1,133 +1,107 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<title>Gestión de Proyectos</title>
-	<meta name="content-type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link
-		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/bootstrap/css/bootstrap.min.css"
-		rel="stylesheet" />
-	<link
-		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/styles.css"
-		rel="stylesheet" />
-	<link REL="SHORTCUT ICON"
-		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icono.png" />
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templateAdm.xhtml">
 
-</h:head>
-<h:body class="login-bg">
-	<div class="header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 col-sm-12" align="center">
-					<div class="col-md-4 col-sm-3" style="padding-right: 11%">
-						<h:form>
-							<p:menuButton icon="fa fa-list-ul" style="margin-top: 30px;">
-								<p:menuitem value="Mi perfil" icon="fa fa-user" />
-								<p:menuitem value="Cambiar contraseña" icon="fa fa-exchange" />
-								<p:menuitem value="Vista de Proyectos" icon="fa fa-exchange"
-									url="/vistaProyectos.xhtml" />
-								<p:separator />
-								<p:menuitem value="Desconectarse" icon="fa fa-close"
-									action="#{inicioView.logOut}" />
-							</p:menuButton>
-							<p:outputLabel value="#{inicioView.usuario}"
-								style="margin-top: 30px;" />
-						</h:form>
-					</div>
-					<div class="col-md-4 col-sm-6" align="center">
-						<p:graphicImage
-							value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/logocb.png" />
-
-					</div>
-					<div class="col-md-4 col-sm-3" align="center"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<h:form styleClass="form-signin" id="form">
-		<p:growl id="msg" showDetail="true" />
-		<div class="page-content container">
-			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
-					<div class="login-wrapper">
-						<div class="box">
-							<div class="content-wrap">
-								<h2>Creación de Proyectos</h2>
-								<div align="center">
-
-									<p:panelGrid id="panelProyecto" columns="2" style="border:0px;">
-										<p:outputLabel value="Nombre de Proyecto" />
-										<p:inputText id="txtNombre"
-											binding="#{proyectoView.txtNombre}"
-											placeholder=" Ej. CoBoard" />
-
-										<p:outputLabel value="Tipo de Proyecto" />
-										<p:selectOneMenu id="somTipoProyecto"
-											binding="#{proyectoView.somTipoProyecto}">
-											<f:selectItems
-												value="#{proyectoView.losTipoProyectoSelectItem}" />
-										</p:selectOneMenu>
-
-										<p:outputLabel value="Número de Variables" />
-										<p:inputNumber id="txtMinimopreguntas"
-											binding="#{proyectoView.txtMinimopreguntas}"
-											placeholder="Mínimo 1" />
-
-										<p:outputLabel value="Grado de Aceptación" />
-										<p:inputNumber id="txtPorcentajefiltro"
-											binding="#{proyectoView.txtPorcentajefiltro}"
-											placeholder="En porcentaje. Ej. 10" />
-
-										<p:outputLabel value="Seleccione una Fecha Inicio" />
-										<p:calendar id="txtFechainicio"
-											value="#{proyectoView.txtFechainicio}" showOn="button"
-											placeholder="Fecha Inicio" />
-
-										<p:outputLabel value="Seleccione una Fecha Fin" />
-										<p:calendar id="txtFechafin"
-											value="#{proyectoView.txtFechafin}" showOn="button"
-											placeholder="Fecha Fin" />
-
-										<p:outputLabel value="Estado Activo" />
-										<p:selectOneMenu id="somActiva"
-											binding="#{proyectoView.somActiva}">
-											<f:selectItem itemValue="S" itemLabel="SI" />
-											<f:selectItem itemValue="N" itemLabel="NO" />
-										</p:selectOneMenu>
-
-										<p:outputLabel value="Descripción" />
-										<p:inputTextarea id="txtDescripcion" rows="5" cols="31"
-											binding="#{proyectoView.txtDescripcion}"
-											placeholder="Brinde una corta descripción del proyecto para que los demás puedan verla." />
-									</p:panelGrid>
-								</div>
-								<BR />
-								<p:panel id="panelBotones" style="border:0px;">
-									<div align="center">
-										<p:commandButton id="btnSave"
-											binding="#{proyectoView.btnSave}" value="Crear"
-											action="#{proyectoView.crearProyecto}" update="form" />
-
-										<p:commandButton id="btnClear" value="Limpiar"
-											action="#{proyectoView.limpiar}" update="form" />
-									</div>
-								</p:panel>
-							</div>
+	<ui:define name="content">
+		<div class="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12" align="center">
+						<div class="col-md-4 col-sm-3" style="padding-right: 11%">
+							<h:form>
+								<p:outputLabel value="#{inicioView.usuario}"
+									style="margin-top: 30px;" />
+							</h:form>
 						</div>
-
+						<div class="col-md-4 col-sm-6" align="center">
+							<p:graphicImage
+								value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/logocb.png" />
+	
+						</div>
+						<div class="col-md-4 col-sm-3" align="center"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</h:form>
+	
+		<h:form styleClass="form-signin" id="form">
+			<p:growl id="msg" showDetail="true" />
+			<div class="page-content container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<div class="login-wrapper">
+							<div class="box">
+								<div class="content-wrap">
+									<div align="center">
+										<h2>Creación de Proyectos</h2>
+										<p:panelGrid id="panelProyecto" columns="2" style="border:0px;">
+											<p:outputLabel value="Nombre de Proyecto" />
+											<p:inputText id="txtNombre"
+												binding="#{proyectoView.txtNombre}"
+												placeholder=" Ej. CoBoard" />
+	
+											<p:outputLabel value="Tipo de Proyecto" />
+											<p:selectOneMenu id="somTipoProyecto"
+												binding="#{proyectoView.somTipoProyecto}">
+												<f:selectItems
+													value="#{proyectoView.losTipoProyectoSelectItem}" />
+											</p:selectOneMenu>
+	
+											<p:outputLabel value="Número de Variables" />
+											<p:inputNumber id="txtMinimopreguntas"
+												binding="#{proyectoView.txtMinimopreguntas}"
+												placeholder="Mínimo 1" />
+	
+											<p:outputLabel value="Grado de Aceptación" />
+											<p:inputNumber id="txtPorcentajefiltro"
+												binding="#{proyectoView.txtPorcentajefiltro}"
+												placeholder="En porcentaje. Ej. 10" />
+	
+											<p:outputLabel value="Seleccione una Fecha Inicio" />
+											<p:calendar id="txtFechainicio"
+												value="#{proyectoView.txtFechainicio}" showOn="button"
+												placeholder="Fecha Inicio" />
+	
+											<p:outputLabel value="Seleccione una Fecha Fin" />
+											<p:calendar id="txtFechafin"
+												value="#{proyectoView.txtFechafin}" showOn="button"
+												placeholder="Fecha Fin" />
+	
+											<p:outputLabel value="Estado Activo" />
+											<p:selectOneMenu id="somActiva"
+												binding="#{proyectoView.somActiva}">
+												<f:selectItem itemValue="S" itemLabel="SI" />
+												<f:selectItem itemValue="N" itemLabel="NO" />
+											</p:selectOneMenu>
+	
+											<p:outputLabel value="Descripción" />
+											<p:inputTextarea id="txtDescripcion" rows="5" cols="31"
+												binding="#{proyectoView.txtDescripcion}"
+												placeholder="Brinde una corta descripción del proyecto para que los demás puedan verla." />
+										</p:panelGrid>
+									</div>
+									<BR />
+									<p:panel id="panelBotones" style="border:0px;">
+										<div align="center">
+											<p:commandButton id="btnSave"
+												binding="#{proyectoView.btnSave}" value="Crear"
+												action="#{proyectoView.crearProyecto}" update="form" />
+	
+											<p:commandButton id="btnClear" value="Limpiar"
+												action="#{proyectoView.limpiar}" update="form" />
+										</div>
+									</p:panel>
+								</div>
+							</div>
+	
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
 
-</h:body>
-
-</html>
+</ui:composition>

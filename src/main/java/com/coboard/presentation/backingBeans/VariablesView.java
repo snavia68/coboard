@@ -107,7 +107,7 @@ public class VariablesView implements Serializable  {
     	
     	//amazon 
     	
-    	businessDelegatorView.uploadPublicRead("coboard-cloud2",proyectoSes.getNombre()+"_"+file.getFileName()+"_"+usuario.getNombre(),fileSubir);  
+    	businessDelegatorView.uploadPublicRead("coboard-cloud2",proyectoSes.getNombre()+"_"+usuario.getNombre()+file.getFileName()+"_",fileSubir);  
     	
     	log.info("URL :"+businessDelegatorView.getUrl("coboard-cloud2", file.getFileName()));
     	log.info("URL : cliente/");

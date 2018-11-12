@@ -119,21 +119,21 @@ public class VotosDAO extends JpaDaoImpl<Votos, Integer> implements IVotosDAO {
 
 	@Override
 	public Integer cantidadVotosVariables(Informacion informacion) {
-		String jpql = "SELECT count(vo.idvoto) FROM votos vo WHERE vo.idinformacion =" + informacion.getIdinformacion();
+		String jpql = "SELECT COUNT(vo.idvoto) FROM votos vo WHERE vo.idinformacion = " + informacion.getIdinformacion();
 		Integer cantidad = (Integer)entityManager.createQuery(jpql).getSingleResult();
 		return cantidad;
 	}
 
 	@Override
-	public Integer cantidadVotosPorEstado(Votos votos) {
-		String jpql = "SELECT count(vo.idvoto) FROM votos vo WHERE vo.voto =" + votos.getVoto();
+	public Integer cantidadVotosPorEstado(String votos, Informacion informacion) {
+		String jpql = "SELECT COUNT(vo.idvoto) FROM votos vo WHERE vo.voto =" + votos + " AND vo.informacion.idinformacion = " + informacion.getIdinformacion();
 		Integer cantidad = (Integer)entityManager.createQuery(jpql).getSingleResult();
 		return cantidad;
 	}
 
 	@Override
 	public Integer cantidadVotosTotalesPorVariable(Informacion informacion, Votos votos) {
-		String jpql = "SELECT count(vo.idvoto) FROM votos vo WHERE vo.idinformacion = " + informacion.getIdinformacion() + " AND vo.voto =" + votos.getVoto();
+		String jpql = "SELECT COUNT(vo.idvoto) FROM votos vo WHERE vo.idinformacion = " + informacion.getIdinformacion() + " AND vo.voto = " + votos.getVoto();
 		Integer cantidad = (Integer)entityManager.createQuery(jpql).getSingleResult();
 		return cantidad;
 	}

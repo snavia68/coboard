@@ -430,8 +430,8 @@ public class VotosLogic implements IVotosLogic {
 	}
 
 	@Override
-	public Integer cantidadVotosPorEstado(Votos votos) {
-		Integer cantidad = votosDAO.cantidadVotosPorEstado(votos);
+	public Integer cantidadVotosPorEstado(String votos, Informacion informacion) {
+		Integer cantidad = votosDAO.cantidadVotosPorEstado(votos, informacion);
 		return cantidad;
 	}
 

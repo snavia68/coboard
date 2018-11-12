@@ -55,4 +55,6 @@ public interface ISesionLogic {
     public List<SesionDTO> getDataSesion() throws Exception;
 
     public void validateSesion(Sesion sesion) throws Exception;
+    
+    public List<Sesion> sesionesEntreFechas (Date fechaInicio, Date fechaFin);
 }

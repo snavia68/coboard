@@ -430,5 +430,11 @@ public class ProyectoLogic implements IProyectoLogic {
         return list;
     }
 
+	@Override
+	public Integer cantidadUsuariosPorProyecto(Proyecto proyecto) {
+		Integer cantidad = proyectoDAO.cantidadUsuariosPorProyecto(proyecto);
+		return cantidad;
+	}
+
 	
 }

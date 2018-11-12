@@ -413,4 +413,9 @@ public class SesionLogic implements ISesionLogic {
 
         return list;
     }
+
+	@Override
+	public List<Sesion> sesionesEntreFechas(Date fechaInicio, Date fechaFin) {
+		return sesionDAO.sesionesEntreFechas(fechaInicio, fechaFin);
+	}
 }

@@ -163,6 +163,8 @@ public interface IBusinessDelegatorView {
     public List<ProyectoDTO> getDataProyecto() throws Exception;
 
     public void validateProyecto(Proyecto proyecto) throws Exception;
+    
+    public Integer cantidadUsuariosPorProyecto (Proyecto proyecto);
 
     public List<Proyectousuario> getProyectousuario() throws Exception;
 
@@ -211,6 +213,8 @@ public interface IBusinessDelegatorView {
     public List<Sesion> findPageSesion(String sortColumnName,
         boolean sortAscending, int startRow, int maxResults)
         throws Exception;
+    
+    public List<Sesion> sesionesEntreFechas (Date fechaInicio, Date fechaFin);
 
     public Long findTotalNumberSesion() throws Exception;
 
@@ -325,7 +329,7 @@ public interface IBusinessDelegatorView {
     
     public Integer cantidadVotosVariables (Informacion informacion);
     
-	public Integer cantidadVotosPorEstado (Votos votos);
+	public Integer cantidadVotosPorEstado (String votos, Informacion informacion);
 	
 	public Integer cantidadVotosTotalesPorVariable (Informacion informacion, Votos votos);
     

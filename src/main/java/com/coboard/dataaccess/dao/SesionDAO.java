@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Scope;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -36,4 +39,10 @@ public class SesionDAO extends JpaDaoImpl<Sesion, Integer> implements ISesionDAO
     public static ISesionDAO getFromApplicationContext(ApplicationContext ctx) {
         return (ISesionDAO) ctx.getBean("SesionDAO");
     }
+
+	@Override
+	public List<Sesion> sesionesEntreFechas(Date fechaInicio, Date fechaFin) {
+		String jpql="SELECT se.usuariocreador, se.fechasesion, se.horasesion, se.fechasesionfin, se.horafin FROM Sesion se WHERE se.fechasesion BETWEEN '" + fechaInicio + "' AND '" + fechaFin + "' ORDER BY (se.fechasesion)";
+		return entityManager.createQuery(jpql).getResultList();
+	}
 }

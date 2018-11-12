@@ -1,8 +1,9 @@
 package com.coboard.dataaccess.dao;
 
 import com.coboard.dataaccess.api.JpaDaoImpl;
-
+import com.coboard.modelo.Informacion;
 import com.coboard.modelo.Proyecto;
+import com.coboard.modelo.Votos;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,4 +38,11 @@ public class ProyectoDAO extends JpaDaoImpl<Proyecto, Integer>
     public static IProyectoDAO getFromApplicationContext(ApplicationContext ctx) {
         return (IProyectoDAO) ctx.getBean("ProyectoDAO");
     }
+    
+    @Override
+	public Integer cantidadUsuariosPorProyecto(Proyecto proyecto) {
+		String jpql = "SELECT count(usu.idusuario) FROM Proyectousuario prus, Usuario usu, Proyecto pro WHERE prus.usuario.idusuario = usu.idusuario AND prus.proyecto.idproyecto = pro.idproyecto AND pro.idproyecto= " + proyecto.getIdproyecto();
+		Integer cantidad = (Integer)entityManager.createQuery(jpql).getSingleResult();
+		return cantidad;
+	}
 }

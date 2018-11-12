@@ -21,6 +21,6 @@ public interface IVotosDAO extends Dao<Votos, Integer> {
 	public Votos existeVoto (Integer idinformacion, Integer idusuario);
 	public List<VotosDTO> votosDeUsuarioPorProyecto(Proyecto proyecto, Usuario usuario);
 	public Integer cantidadVotosVariables (Informacion informacion);
-	public Integer cantidadVotosPorEstado (Votos votos);
+	public Integer cantidadVotosPorEstado (String votos, Informacion informacion);
 	public Integer cantidadVotosTotalesPorVariable (Informacion informacion, Votos votos);
 }

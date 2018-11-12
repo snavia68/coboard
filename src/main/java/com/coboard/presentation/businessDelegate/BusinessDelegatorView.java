@@ -799,12 +799,22 @@ public class BusinessDelegatorView implements IBusinessDelegatorView {
 	}
 
 	@Override
-	public Integer cantidadVotosPorEstado(Votos votos) {
-		return votosLogic.cantidadVotosPorEstado(votos);
+	public Integer cantidadVotosPorEstado(String votos, Informacion informacion) {
+		return votosLogic.cantidadVotosPorEstado(votos, informacion);
 	}
 
 	@Override
 	public Integer cantidadVotosTotalesPorVariable(Informacion informacion, Votos votos) {
 		return votosLogic.cantidadVotosTotalesPorVariable(informacion, votos);
+	}
+
+	@Override
+	public Integer cantidadUsuariosPorProyecto(Proyecto proyecto) {
+		return proyectoLogic.cantidadUsuariosPorProyecto(proyecto);
+	}
+
+	@Override
+	public List<Sesion> sesionesEntreFechas(Date fechaInicio, Date fechaFin) {
+		return sesionLogic.sesionesEntreFechas(fechaInicio, fechaFin);
 	}
 }

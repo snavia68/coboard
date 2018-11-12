@@ -16,4 +16,5 @@ import java.util.Set;
 *
 */
 public interface ISesionDAO extends Dao<Sesion, Integer> {
+	public List<Sesion> sesionesEntreFechas (Date fechaInicio, Date fechaFin);
 }

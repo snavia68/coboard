@@ -56,5 +56,6 @@ public interface IProyectoLogic {
 
     public void validateProyecto(Proyecto proyecto) throws Exception;
     
+    public Integer cantidadUsuariosPorProyecto (Proyecto proyecto);
     
 }

@@ -67,7 +67,7 @@ public interface IVotosLogic {
     
     public Integer cantidadVotosVariables (Informacion informacion);
     
-	public Integer cantidadVotosPorEstado (Votos votos);
+	public Integer cantidadVotosPorEstado (String votos, Informacion informacion);
 	
 	public Integer cantidadVotosTotalesPorVariable (Informacion informacion, Votos votos);
 }

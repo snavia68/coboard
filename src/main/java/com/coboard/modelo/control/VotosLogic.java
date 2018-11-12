@@ -422,4 +422,22 @@ public class VotosLogic implements IVotosLogic {
 		List<VotosDTO> listaVotos = votosDAO.votosDeUsuarioPorProyecto(proyecto, usuario);
 		return listaVotos;
 	}
+
+	@Override
+	public Integer cantidadVotosVariables(Informacion informacion) {
+		Integer cantidad = votosDAO.cantidadVotosVariables(informacion);
+		return cantidad;
+	}
+
+	@Override
+	public Integer cantidadVotosPorEstado(Votos votos) {
+		Integer cantidad = votosDAO.cantidadVotosPorEstado(votos);
+		return cantidad;
+	}
+
+	@Override
+	public Integer cantidadVotosTotalesPorVariable(Informacion informacion, Votos votos) {
+		Integer cantidad = votosDAO.cantidadVotosTotalesPorVariable(informacion, votos);
+		return cantidad;
+	}
 }

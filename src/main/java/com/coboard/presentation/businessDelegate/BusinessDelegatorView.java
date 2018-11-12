@@ -792,4 +792,19 @@ public class BusinessDelegatorView implements IBusinessDelegatorView {
 	public List<VotosDTO> votosDeUsuarioPorProyecto(Proyecto proyecto, Usuario usuario) {
 		return votosLogic.votosDeUsuarioPorProyecto(proyecto, usuario);
 	}
+
+	@Override
+	public Integer cantidadVotosVariables(Informacion informacion) {
+		return votosLogic.cantidadVotosVariables(informacion);
+	}
+
+	@Override
+	public Integer cantidadVotosPorEstado(Votos votos) {
+		return votosLogic.cantidadVotosPorEstado(votos);
+	}
+
+	@Override
+	public Integer cantidadVotosTotalesPorVariable(Informacion informacion, Votos votos) {
+		return votosLogic.cantidadVotosTotalesPorVariable(informacion, votos);
+	}
 }

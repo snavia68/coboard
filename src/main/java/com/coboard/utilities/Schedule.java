@@ -41,7 +41,7 @@ public class Schedule {
 			if (proyecto.getFechafin().equals(date) == true || proyecto.getFechafin().before(date)) {
 				proyecto.setActivo('N');
 				proyectoLogic.updateProyecto(proyecto);
-				log.info("El proyecto "+proyecto.getDescripcion()+" ha expirado");
+				log.info("El proyecto "+proyecto.getNombre()+" ha expirado");
 			}
 		}
 		

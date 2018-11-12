@@ -24,28 +24,11 @@
 
 				<div class="EmptyBox10"></div>
 				<h:panelGroup rendered="#{!reporteUnoView.descargas}">
-					<h:commandLink>
-						<p:graphicImage name="images/excel.png" library="sentinel-layout"/>
-						<p:dataExporter type="xls" target="tbl" fileName="votosProyecto_#{reporteUnoView.proyecto}"
-							pageOnly="true" />
-					</h:commandLink>
+					
 
-					<h:commandLink>
+					<h:commandLink ajax="false" title="Descargar PDF" actionListener="#{reporteUnoView.exportarPDF}">
 						<p:graphicImage name="images/pdf (1).png" library="sentinel-layout"/>
-						<p:dataExporter type="pdf" target="tbl" fileName="votosProyecto_#{reporteUnoView.proyecto}"
-							pageOnly="true" preProcessor="#{reporteUnoView.preProcessPDF}"/>
-					</h:commandLink>
-
-					<h:commandLink>
-						<p:graphicImage name="images/csv (1).png" library="sentinel-layout"/>
-						<p:dataExporter type="csv" target="tbl" fileName="votosProyecto_#{reporteUnoView.proyecto}"
-							pageOnly="true" />
-					</h:commandLink>
-
-					<h:commandLink>
-						<p:graphicImage name="images/xml (1).png" library="sentinel-layout"/>
-						<p:dataExporter type="xml" target="tbl" fileName="votosProyecto_#{reporteUnoView.proyecto}"
-							pageOnly="true" encoding=""/>
+						
 					</h:commandLink>
 
 					<p:dataTable id="tbl" var="voto" value="#{reporteUnoView.losvotos}"
@@ -55,14 +38,14 @@
 							<f:facet name="header">
 								<h:outputText value="Informacion" />
 							</f:facet>
-							<h:outputText value="#{voto.descripcionInformacion}" />
+							<h:outputText value="#{voto.descripcion}" />
 						</p:column>
 
 						<p:column>
 							<f:facet name="header">
 								<h:outputText value="Voto" />
 							</f:facet>
-							<h:outputText value="#{voto.votosRealizados}" />
+							<h:outputText value="#{voto.voto}" />
 							
 						</p:column>
 

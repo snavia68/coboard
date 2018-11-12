@@ -28,21 +28,22 @@ public class VotosDTO implements Serializable {
     private String voto;
     private Integer idinformacion_Informacion;
     private Integer idsesion_Sesion;
-    private String descripcionInformacion;
-    private String nombresUsuarios;
-    private String votosRealizados;
+    private String descripcioninformacion;
+    private String descripcion;
+    private String nombresusuarios;
+    private String votosrealizados;
     private List<String[]> listaVotosUsuarios;
 
-    public VotosDTO(String descripcionInformacion, String nombresUsuarios, String votosRealizados) {
+    public VotosDTO(String descripcioninformacion, String nombresusuarios, String votosrealizados) {
 		super();
-		this.descripcionInformacion = descripcionInformacion;
-		this.nombresUsuarios = nombresUsuarios;
-		this.votosRealizados = votosRealizados;
+		this.descripcioninformacion = descripcioninformacion;
+		this.nombresusuarios = nombresusuarios;
+		this.votosrealizados = votosrealizados;
 		
 		listaVotosUsuarios = new ArrayList<String[]>();
 		
-		String[] usuariosSplit = nombresUsuarios.split(",");
-		String[] votosSplit = votosRealizados.split(",");
+		String[] usuariosSplit = nombresusuarios.split(",");
+		String[] votosSplit = votosrealizados.split(",");
 		
 		for (int i = 0; i < usuariosSplit.length; i++) {
 			String[] llave = {usuariosSplit[i], votosSplit[i]};
@@ -53,10 +54,10 @@ public class VotosDTO implements Serializable {
 		
 	}
     
-    public VotosDTO(String descripcionInformacion, String votosRealizados) {
+    public VotosDTO(String descripcioninformacion, String votosrealizados) {
 		super();
-		this.descripcionInformacion = descripcionInformacion;
-		this.votosRealizados = votosRealizados;
+		this.descripcion = descripcioninformacion;
+		this.voto = votosrealizados;
 			
 		
 	}
@@ -65,7 +66,14 @@ public class VotosDTO implements Serializable {
 	public VotosDTO() {
 		super();
 	}
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
 
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
 	public String getActivo() {
         return activo;
@@ -139,28 +147,28 @@ public class VotosDTO implements Serializable {
         this.idsesion_Sesion = idsesion_Sesion;
     }
 
-	public String getDescripcionInformacion() {
-		return descripcionInformacion;
+	public String getdescripcioninformacion() {
+		return descripcioninformacion;
 	}
 
-	public void setDescripcionInformacion(String descripcionInformacion) {
-		this.descripcionInformacion = descripcionInformacion;
+	public void setdescripcioninformacion(String descripcioninformacion) {
+		this.descripcioninformacion = descripcioninformacion;
 	}
 
-	public String getNombresUsuarios() {
-		return nombresUsuarios;
+	public String getnombresusuarios() {
+		return nombresusuarios;
 	}
 
-	public void setNombresUsuarios(String nombresUsuarios) {
-		this.nombresUsuarios = nombresUsuarios;
+	public void setnombresusuarios(String nombresusuarios) {
+		this.nombresusuarios = nombresusuarios;
 	}
 
-	public String getVotosRealizados() {
-		return votosRealizados;
+	public String getvotosrealizados() {
+		return votosrealizados;
 	}
 
-	public void setVotosRealizados(String votosRealizados) {
-		this.votosRealizados = votosRealizados;
+	public void setvotosrealizados(String votosrealizados) {
+		this.votosrealizados = votosrealizados;
 	}
 
 	public List<String[]> getListaVotosUsuarios() {

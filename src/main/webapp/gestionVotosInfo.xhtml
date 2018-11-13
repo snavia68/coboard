@@ -27,18 +27,32 @@
 								</div>
 							</p:column>
 							
+<script type="text/javascript">
+    //<![CDATA[
+function start() {
+    PF('statusDialog').show();
+}
+ 
+function stop() {
+    PF('statusDialog').hide();
+}
+    //]]>
+</script>    
+ 
+							
 							<p:column headerText="Adjuntos">
 								<div align="center">
 									
 									<p:commandButton id="btnDescargar" class="ui-button"
 										icon="fa fa-download"
 										ajax="false"
-										action="#{informacionView.descargarArchivos}"
-										style="color:white;" update="form"
-										>										
-										<p:fileDownload value="#{informacionView.file}" />	
-										<f:setPropertyActionListener value="#{informacion}"
-										target="#{informacionView.variableSelected}" />								
+										actionListener="#{informacionView.descargarArchivos(informacion)}"
+										onclick="PrimeFaces.monitorDownload(start, stop);"
+										style="color:white;" update="form">										
+										<p:fileDownload value="#{informacionView.file}">	
+											<!-- f:setPropertyActionListener value="#{informacion}"
+											target="#{informacionView.variableSelected}" /-->
+										</p:fileDownload>						
 									</p:commandButton>
 								</div>
 							</p:column>

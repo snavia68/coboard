@@ -4,7 +4,7 @@ import com.coboard.modelo.Proyecto;
 import com.coboard.modelo.dto.ProyectoDTO;
 
 import java.math.BigDecimal;
-
+import java.math.BigInteger;
 import java.util.*;
 import java.util.Date;
 import java.util.List;
@@ -56,6 +56,6 @@ public interface IProyectoLogic {
 
     public void validateProyecto(Proyecto proyecto) throws Exception;
     
-    public Integer cantidadUsuariosPorProyecto (Proyecto proyecto);
+    public Long cantidadUsuariosPorProyecto (Proyecto proyecto);
     
 }

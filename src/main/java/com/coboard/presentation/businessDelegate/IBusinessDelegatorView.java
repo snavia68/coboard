@@ -50,7 +50,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.InputStream;
 import java.math.BigDecimal;
-
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -164,7 +164,7 @@ public interface IBusinessDelegatorView {
 
     public void validateProyecto(Proyecto proyecto) throws Exception;
     
-    public Integer cantidadUsuariosPorProyecto (Proyecto proyecto);
+    public Long cantidadUsuariosPorProyecto (Proyecto proyecto);
 
     public List<Proyectousuario> getProyectousuario() throws Exception;
 
@@ -327,11 +327,11 @@ public interface IBusinessDelegatorView {
     
     public Votos existeVoto (Integer idinformacion, Integer idusuario);
     
-    public Integer cantidadVotosVariables (Informacion informacion);
+    public Long cantidadVotosVariables (Informacion informacion);
     
-	public Integer cantidadVotosPorEstado (String votos, Informacion informacion);
+	public Long cantidadVotosPorEstado (String votos, Informacion informacion);
 	
-	public Integer cantidadVotosTotalesPorVariable (Informacion informacion, Votos votos);
+	public Long cantidadVotosTotalesPorVariable (Informacion informacion, Votos votos);
     
     public Usuario getUsuarioByEmail(String correo);
     

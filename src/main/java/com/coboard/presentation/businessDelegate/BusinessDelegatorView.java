@@ -56,7 +56,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.InputStream;
 import java.math.BigDecimal;
-
+import java.math.BigInteger;
 import java.sql.*;
 
 import java.util.Date;
@@ -794,22 +794,22 @@ public class BusinessDelegatorView implements IBusinessDelegatorView {
 	}
 
 	@Override
-	public Integer cantidadVotosVariables(Informacion informacion) {
+	public Long cantidadVotosVariables(Informacion informacion) {
 		return votosLogic.cantidadVotosVariables(informacion);
 	}
 
 	@Override
-	public Integer cantidadVotosPorEstado(String votos, Informacion informacion) {
+	public Long cantidadVotosPorEstado(String votos, Informacion informacion) {
 		return votosLogic.cantidadVotosPorEstado(votos, informacion);
 	}
 
 	@Override
-	public Integer cantidadVotosTotalesPorVariable(Informacion informacion, Votos votos) {
+	public Long cantidadVotosTotalesPorVariable(Informacion informacion, Votos votos) {
 		return votosLogic.cantidadVotosTotalesPorVariable(informacion, votos);
 	}
 
 	@Override
-	public Integer cantidadUsuariosPorProyecto(Proyecto proyecto) {
+	public Long cantidadUsuariosPorProyecto(Proyecto proyecto) {
 		return proyectoLogic.cantidadUsuariosPorProyecto(proyecto);
 	}
 

@@ -118,23 +118,23 @@ public class VotosDAO extends JpaDaoImpl<Votos, Integer> implements IVotosDAO {
 	}
 
 	@Override
-	public Integer cantidadVotosVariables(Informacion informacion) {
-		String jpql = "SELECT COUNT(vo.idvoto) FROM votos vo WHERE vo.idinformacion = " + informacion.getIdinformacion();
-		Integer cantidad = (Integer)entityManager.createQuery(jpql).getSingleResult();
+	public Long cantidadVotosVariables(Informacion informacion) {
+		String jpql = "SELECT COUNT(vo.idvoto) FROM Votos vo WHERE vo.idinformacion = " + informacion.getIdinformacion();
+		Long cantidad = (Long)entityManager.createQuery(jpql).getSingleResult();
 		return cantidad;
 	}
 
 	@Override
-	public Integer cantidadVotosPorEstado(String votos, Informacion informacion) {
-		String jpql = "SELECT COUNT(vo.idvoto) FROM votos vo WHERE vo.voto =" + votos + " AND vo.informacion.idinformacion = " + informacion.getIdinformacion();
-		Integer cantidad = (Integer)entityManager.createQuery(jpql).getSingleResult();
+	public Long cantidadVotosPorEstado(String votos, Informacion informacion) {
+		String jpql = "SELECT COUNT(vo.idvoto) FROM Votos vo WHERE vo.voto = '" + votos + "' AND vo.informacion.idinformacion = " + informacion.getIdinformacion();
+		Long cantidad = (Long)entityManager.createQuery(jpql).getSingleResult();
 		return cantidad;
 	}
 
 	@Override
-	public Integer cantidadVotosTotalesPorVariable(Informacion informacion, Votos votos) {
-		String jpql = "SELECT COUNT(vo.idvoto) FROM votos vo WHERE vo.idinformacion = " + informacion.getIdinformacion() + " AND vo.voto = " + votos.getVoto();
-		Integer cantidad = (Integer)entityManager.createQuery(jpql).getSingleResult();
+	public Long cantidadVotosTotalesPorVariable(Informacion informacion, Votos votos) {
+		String jpql = "SELECT COUNT(vo.idvoto) FROM Votos vo WHERE vo.idinformacion = " + informacion.getIdinformacion() + " AND vo.voto = '" + votos.getVoto() +"'";
+		Long cantidad = (Long)entityManager.createQuery(jpql).getSingleResult();
 		return cantidad;
 	}
 	

@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -431,8 +431,8 @@ public class ProyectoLogic implements IProyectoLogic {
     }
 
 	@Override
-	public Integer cantidadUsuariosPorProyecto(Proyecto proyecto) {
-		Integer cantidad = proyectoDAO.cantidadUsuariosPorProyecto(proyecto);
+	public Long cantidadUsuariosPorProyecto(Proyecto proyecto) {
+		Long cantidad = proyectoDAO.cantidadUsuariosPorProyecto(proyecto);
 		return cantidad;
 	}
 

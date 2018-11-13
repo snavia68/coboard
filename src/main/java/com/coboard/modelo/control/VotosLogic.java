@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -424,20 +424,20 @@ public class VotosLogic implements IVotosLogic {
 	}
 
 	@Override
-	public Integer cantidadVotosVariables(Informacion informacion) {
-		Integer cantidad = votosDAO.cantidadVotosVariables(informacion);
+	public Long cantidadVotosVariables(Informacion informacion) {
+		Long cantidad = votosDAO.cantidadVotosVariables(informacion);
 		return cantidad;
 	}
 
 	@Override
-	public Integer cantidadVotosPorEstado(String votos, Informacion informacion) {
-		Integer cantidad = votosDAO.cantidadVotosPorEstado(votos, informacion);
+	public Long cantidadVotosPorEstado(String votos, Informacion informacion) {
+		Long cantidad = votosDAO.cantidadVotosPorEstado(votos, informacion);
 		return cantidad;
 	}
 
 	@Override
-	public Integer cantidadVotosTotalesPorVariable(Informacion informacion, Votos votos) {
-		Integer cantidad = votosDAO.cantidadVotosTotalesPorVariable(informacion, votos);
+	public Long cantidadVotosTotalesPorVariable(Informacion informacion, Votos votos) {
+		Long cantidad = votosDAO.cantidadVotosTotalesPorVariable(informacion, votos);
 		return cantidad;
 	}
 }

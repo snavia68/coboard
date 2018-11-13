@@ -7,7 +7,6 @@ import com.coboard.modelo.Usuario;
 import com.coboard.modelo.Votos;
 import com.coboard.modelo.dto.VotosDTO;
 
-
 import java.util.List;
 
 
@@ -20,7 +19,7 @@ public interface IVotosDAO extends Dao<Votos, Integer> {
 	public List<VotosDTO> votosDeUsuarios(Proyecto proyecto);
 	public Votos existeVoto (Integer idinformacion, Integer idusuario);
 	public List<VotosDTO> votosDeUsuarioPorProyecto(Proyecto proyecto, Usuario usuario);
-	public Integer cantidadVotosVariables (Informacion informacion);
-	public Integer cantidadVotosPorEstado (String votos, Informacion informacion);
-	public Integer cantidadVotosTotalesPorVariable (Informacion informacion, Votos votos);
+	public Long cantidadVotosVariables (Informacion informacion);
+	public Long cantidadVotosPorEstado (String votos, Informacion informacion);
+	public Long cantidadVotosTotalesPorVariable (Informacion informacion, Votos votos);
 }

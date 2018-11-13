@@ -7,7 +7,7 @@ import com.coboard.modelo.Votos;
 import com.coboard.modelo.dto.VotosDTO;
 
 import java.math.BigDecimal;
-
+import java.math.BigInteger;
 import java.util.*;
 import java.util.Date;
 import java.util.List;
@@ -65,9 +65,9 @@ public interface IVotosLogic {
     
     public List<VotosDTO> votosDeUsuarioPorProyecto(Proyecto proyecto, Usuario usuario);
     
-    public Integer cantidadVotosVariables (Informacion informacion);
+    public Long cantidadVotosVariables (Informacion informacion);
     
-	public Integer cantidadVotosPorEstado (String votos, Informacion informacion);
+	public Long cantidadVotosPorEstado (String votos, Informacion informacion);
 	
-	public Integer cantidadVotosTotalesPorVariable (Informacion informacion, Votos votos);
+	public Long cantidadVotosTotalesPorVariable (Informacion informacion, Votos votos);
 }

@@ -239,7 +239,9 @@ public class InformacionLogic implements IInformacionLogic {
     public List<Informacion> listarVariablesProyecto(Proyecto proyecto) throws Exception {
         List<Informacion> entity = null;
         try {
-            entity = informacionDAO.findByProperty("proyecto", proyecto);
+        	Object[] variables = {"proyecto.idproyecto", false, proyecto.getIdproyecto(), "="};
+            entity = findByCriteria(variables, null, null);
+        	//entity = informacionDAO.findByProperty("proyecto", proyecto);
         } catch (Exception e) {
             throw new ZMessManager().new FindingException("Informacion Count");
         } finally {

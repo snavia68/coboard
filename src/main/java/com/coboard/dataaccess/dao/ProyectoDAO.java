@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Scope;
 
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
+
+import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -40,9 +43,9 @@ public class ProyectoDAO extends JpaDaoImpl<Proyecto, Integer>
     }
     
     @Override
-	public Integer cantidadUsuariosPorProyecto(Proyecto proyecto) {
-		String jpql = "SELECT count(usu.idusuario) FROM Proyectousuario prus, Usuario usu, Proyecto pro WHERE prus.usuario.idusuario = usu.idusuario AND prus.proyecto.idproyecto = pro.idproyecto AND pro.idproyecto= " + proyecto.getIdproyecto();
-		Integer cantidad = (Integer)entityManager.createQuery(jpql).getSingleResult();
+	public Long cantidadUsuariosPorProyecto(Proyecto proyecto) {
+		String jpql = "SELECT count(usuario.idusuario) FROM Proyectousuario prus WHERE prus.proyecto.idproyecto = " + proyecto.getIdproyecto();
+		Long cantidad = (Long)entityManager.createQuery(jpql).getSingleResult();
 		return cantidad;
 	}
 }

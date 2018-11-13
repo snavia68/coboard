@@ -42,7 +42,7 @@ public class SesionDAO extends JpaDaoImpl<Sesion, Integer> implements ISesionDAO
 
 	@Override
 	public List<Sesion> sesionesEntreFechas(Date fechaInicio, Date fechaFin) {
-		String jpql="SELECT se.usuariocreador, se.fechasesion, se.horasesion, se.fechasesionfin, se.horafin FROM Sesion se WHERE se.fechasesion BETWEEN '" + fechaInicio + "' AND '" + fechaFin + "' ORDER BY (se.fechasesion)";
+		String jpql="SELECT se FROM Sesion se WHERE se.fechasesion BETWEEN '" + fechaInicio + "' AND '" + fechaFin + "' ORDER BY (se.fechasesion)";
 		return entityManager.createQuery(jpql).getResultList();
 	}
 }

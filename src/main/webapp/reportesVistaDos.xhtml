@@ -16,27 +16,69 @@
 				
 					<p:outputLabel value="Seleccione una Fecha Inicio" />
 						<p:calendar id="txtFechainicio"
-							value="" showOn="button"
+							value="#{reporteDosView.fechaInicio}" showOn="button"
 							placeholder="Fecha Inicio" />
 
 					<p:outputLabel value="Seleccione una Fecha Fin" />
 						<p:calendar id="txtFechafin"
-							value="" showOn="button"
+							value="#{reporteDosView.fechaFin}" showOn="button"
 							placeholder="Fecha Fin" />
 				
 				<div class="EmptyBox10"></div>
 				<p:commandButton value="Buscar" update="form"
-					/>
+					actionListener="#{reporteDosView.buscarSesiones}"/>
 
 				<div class="EmptyBox10"></div>
-				<h:panelGroup rendered="">
-					
-
-					<h:commandLink ajax="false" title="Descargar PDF">
+				<h:panelGroup rendered="#{!reporteDosView.descargas}">
+						<h:commandLink ajax="false" title="Descargar PDF" actionListener="#{reporteDosView.exportarPDF}">
 						<p:graphicImage name="images/pdf (1).png" library="sentinel-layout"/>
 						
 					</h:commandLink>
+				
+				    <p:dataTable id="tbl" var="sesiones" value="#{reporteDosView.lasSesiones}"
+						paginator="true" rows="5">
 
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Usuario" />
+							</f:facet>
+							<h:outputText value="#{sesiones.usuariocreador}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Fecha inicio sesión" />
+							</f:facet>
+							<h:outputText value="#{sesiones.fechasesion}" />
+							
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Hora sesión" />
+							</f:facet>
+							<h:outputText value="#{sesiones.horasesion}" />
+							
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Fecha fin sesión" />
+							</f:facet>
+							<h:outputText value="#{sesiones.fechasesionfin}" />
+							
+						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Hora fin" />
+							</f:facet>
+							<h:outputText value="#{sesiones.horafin}" />
+							
+						</p:column>
+
+					</p:dataTable>
+				
 				</h:panelGroup>
 			</div>
 

@@ -222,10 +222,10 @@ public class InformacionView implements Serializable {
     }
     
     
-    public void descargarArchivos(){
+    public void descargarArchivos(Informacion variableSele){
     	
 		try {
-	    	Adjuntos adjuntos = businessDelegatorView.findAdjuntoByInformacion(variableSelected.getIdinformacion());
+	    	Adjuntos adjuntos = businessDelegatorView.findAdjuntoByInformacion(variableSele.getIdinformacion());
 	    	InputStream fileConsulta = businessDelegatorView.download("coboard-cloud2", adjuntos.getUrl());
 			
 	    	file = new DefaultStreamedContent(fileConsulta, "",adjuntos.getUrl());
@@ -233,16 +233,17 @@ public class InformacionView implements Serializable {
 	    	
 			FacesContext.getCurrentInstance().addMessage("",
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha descargado el archivo: "+adjuntos.getUrl(), ""));
-    	
+			
+			
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage("",
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
 		}
     	
-    	
     }
     
     public StreamedContent getFile() {
+    	
         return file;
     }
     

@@ -229,9 +229,10 @@ public class VariablesView implements Serializable  {
     	Proyecto proyecto;
 		try {
 			proyecto = businessDelegatorView.getProyecto(variableSelected.getProyecto().getIdproyecto());
-		
-			Adjuntos adjuntos = businessDelegatorView.findAdjuntoByInformacion(variableSelected.getIdinformacion());
 			
+			
+			Adjuntos adjuntos = businessDelegatorView.findAdjuntoByInformacion(variableSelected.getIdinformacion());
+	
 			log.info("Key de búsqueda: " + adjuntos.getUrl());
 			
 			InputStream fileConsulta = businessDelegatorView.download("coboard-cloud2", adjuntos.getUrl());

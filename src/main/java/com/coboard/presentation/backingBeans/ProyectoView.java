@@ -9,6 +9,7 @@ import com.coboard.presentation.businessDelegate.*;
 
 import com.coboard.utilities.*;
 
+import org.joda.time.DateTime;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.inputnumber.InputNumber;
 import org.primefaces.component.inputtext.InputText;
@@ -71,6 +72,11 @@ public class ProyectoView implements Serializable {
     private List<String> losUsuarios;
     
     private List<Usuario> usuariosOnline;
+    private List<Mensaje> losMensajes;
+    
+    private String mensaje;
+    
+    private int idusuario;
     
     Proyecto proyecto;
     
@@ -397,6 +403,67 @@ public class ProyectoView implements Serializable {
 
 	public void setUsuariosOnline(List<Usuario> usuariosOnline) {
 		this.usuariosOnline = usuariosOnline;
+	}
+
+	public List<Mensaje> getLosMensajes() throws Exception {
+		
+		proyecto =  (Proyecto)FacesUtils.getfromSession("proyecto");
+		losMensajes = businessDelegatorView.mensajesPorProyecto(proyecto.getIdproyecto());
+		
+		return losMensajes;
+	}
+
+	public void setLosMensajes(List<Mensaje> losMensajes) {
+		this.losMensajes = losMensajes;
+	}
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}	
+	
+	public String sendMessage() {
+		try {
+			proyecto =  (Proyecto)FacesUtils.getfromSession("proyecto");
+			Usuario usu=(Usuario)FacesUtils.getfromSession("usuario");
+			
+			DateTime now = DateTime.now();
+			Date date = now.toDate();
+			
+			Mensaje msj = new Mensaje();
+			
+			msj.setIdproyecto(proyecto.getIdproyecto());
+			msj.setIdusuario(usu.getIdusuario());
+			msj.setUsuario(usu.getNombre());
+			msj.setFecha(new Date());
+			msj.setHora(date);
+			msj.setMensaje(mensaje);
+			
+			businessDelegatorView.saveMensaje(msj);;
+			
+			mensaje= "";
+			
+			
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage("",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
+		}
+    	return "";
+	}
+
+	public int getIdusuario() {
+		Usuario usu=(Usuario)FacesUtils.getfromSession("usuario");
+		idusuario = usu.getIdusuario();
+		return idusuario;
+	}
+
+	public void setIdusuario(int idusuario) {
+		this.idusuario = idusuario;
+	}
+	
+	
 	
 }

@@ -5,7 +5,8 @@
 	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
 
 	<ui:define name="content">
-		<h:form styleClass="form-signin" id="form" enctype="multipart/form-data">
+		<h:form styleClass="form-signin" id="form"
+			enctype="multipart/form-data">
 
 			<div class="EmptyBox10"></div>
 			<div align="center">
@@ -26,33 +27,32 @@
 									<p:outputLabel value="#{informacion.descripcion}" />
 								</div>
 							</p:column>
-							
-<script type="text/javascript">
-    //<![CDATA[
-function start() {
-    PF('statusDialog').show();
-}
- 
-function stop() {
-    PF('statusDialog').hide();
-}
-    //]]>
-</script>    
- 
-							
+
+							<script type="text/javascript">
+								//<![CDATA[
+								function start() {
+									PF('statusDialog').show();
+								}
+
+								function stop() {
+									PF('statusDialog').hide();
+								}
+								//]]>
+							</script>
+
+
 							<p:column headerText="Adjuntos">
 								<div align="center">
-									
+
 									<p:commandButton id="btnDescargar" class="ui-button"
-										icon="fa fa-download"
-										ajax="false"
+										icon="fa fa-download" ajax="false"
 										actionListener="#{informacionView.descargarArchivos(informacion)}"
 										onclick="PrimeFaces.monitorDownload(start, stop);"
-										style="color:white;" update="form">										
-										<p:fileDownload value="#{informacionView.file}">	
+										style="color:white;" update="form">
+										<p:fileDownload value="#{informacionView.file}">
 											<!-- f:setPropertyActionListener value="#{informacion}"
 											target="#{informacionView.variableSelected}" /-->
-										</p:fileDownload>						
+										</p:fileDownload>
 									</p:commandButton>
 								</div>
 							</p:column>
@@ -116,7 +116,7 @@ function stop() {
 					</p:panel>
 
 				</div>
-				
+
 			</h:panelGrid>
 			<p:messages id="msg" showDetail="true" />
 			<p:growl id="msgGrowl" showDetail="false" />
@@ -124,23 +124,64 @@ function stop() {
 				<p:fieldset legend="CoBoard Social" toggleable="true"
 					toggleSpeed="500" collapsed="true">
 
-					<h:panelGrid columns="2" cellpadding="5">
-						<p:panel header="Usuarios activos">
-							<p:dataList id="usersOnline"
-								value="#{proyectoView.usuariosOnline}" var="usus" type="ordered"
-								itemType="none">
-								<i class="fa fa-circle" />
-       							 #{usus.nombre}
-    						</p:dataList>
-						</p:panel>
-						<p:panel header="CoBoard Chat">
+					<div class="ui-g">
+						<div class="ui-g-3">
+							<p:panel header="Usuarios activos">
+								<p:dataList id="usersOnline"
+									value="#{proyectoView.usuariosOnline}" var="usus"
+									type="ordered" itemType="none">
+									<i class="fa fa-circle" style="color: #0f6ebb;"/>
+	       							 #{usus.nombre}
+	    						</p:dataList>
+							</p:panel>
+						</div>
+						<div class="ui-g-9">
+							<p:panel header="CoBoard Chat">
+								<div id="contentChat" style="width: 600px; height: 250px; overflow-y: scroll;">
+									<p:panel id="chatPanel">
+										<p:repeat var="msj" value="#{proyectoView.losMensajes}">
+											<h:panelGrid columns="1" style="width:100%"
+												columnClasses="logo,detail">
+												
+													<p:outputPanel>
+														<h:panelGrid columns="2" cellpadding="5">
+															<h:outputText value="#{msj.usuario}:"
+																style="#{msj.idusuario == proyectoView.idusuario ? 'font-weight: bold; color: #ff5a04;':'font-weight: bold; color: #0f6ebb;'}" />
+															<h:outputText value="#{msj.mensaje}" />
+														</h:panelGrid>
+														<h:outputText value="#{msj.fecha}" style="font-size:11px;">
+														    <f:convertDateTime pattern="MM/dd/yyyy" />
+														</h:outputText>
+														<h:outputText value=" - "></h:outputText>
+														<h:outputText value="#{msj.hora}" style="font-size:11px;">
+														    <f:convertDateTime pattern="HH:mm" />
+														</h:outputText>
+													</p:outputPanel>
+											</h:panelGrid>
+											<p:separator/>
+										</p:repeat>
+										<script>
+								$("#contentChat").scrollTop(1000);
+							</script>
+									</p:panel>
+								</div>
+								
+								<p:separator></p:separator>
+								<p:inputText id="inputMsj" value="#{proyectoView.mensaje}"
+									placeholder="Escribe tu mensaje aquí..." style="width: 400px;"></p:inputText>
+								<p:commandButton id="btnSendMessage" class="ui-button"
+									title="Enviar mensaje" action="#{proyectoView.sendMessage}"
+									icon="fa fa-reply" style="color:white;" update="inputMsj">
+								</p:commandButton>
+							</p:panel>
 
-						</p:panel>
-					</h:panelGrid>
+						</div>
+						<p:poll interval="3" update="chatPanel" />
+					</div>
 				</p:fieldset>
 			</div>
 		</h:form>
-
+	
 	</ui:define>
 
 </ui:composition>

@@ -4,6 +4,7 @@ import com.coboard.aws.s3.IS3Services;
 import com.coboard.modelo.Adjuntos;
 import com.coboard.modelo.Cargo;
 import com.coboard.modelo.Informacion;
+import com.coboard.modelo.Mensaje;
 import com.coboard.modelo.Proyecto;
 import com.coboard.modelo.Proyectousuario;
 import com.coboard.modelo.Sesion;
@@ -16,6 +17,7 @@ import com.coboard.modelo.control.CargoLogic;
 import com.coboard.modelo.control.IAdjuntosLogic;
 import com.coboard.modelo.control.ICargoLogic;
 import com.coboard.modelo.control.IInformacionLogic;
+import com.coboard.modelo.control.IMensajeLogic;
 import com.coboard.modelo.control.IProyectoLogic;
 import com.coboard.modelo.control.IProyectousuarioLogic;
 import com.coboard.modelo.control.ISesionLogic;
@@ -129,6 +131,8 @@ public class BusinessDelegatorView implements IBusinessDelegatorView {
     private IUsuarioLogic usuarioLogic;
     @Autowired
     private IVotosLogic votosLogic;
+    @Autowired
+    private IMensajeLogic mensajeLogic;
     @Autowired
     private IS3Services s3services;
 
@@ -816,5 +820,18 @@ public class BusinessDelegatorView implements IBusinessDelegatorView {
 	@Override
 	public List<Sesion> sesionesEntreFechas(Date fechaInicio, Date fechaFin) {
 		return sesionLogic.sesionesEntreFechas(fechaInicio, fechaFin);
+	}
+	
+	public void saveMensaje(Mensaje entity) throws Exception {
+        mensajeLogic.saveMensaje(entity);
+    }
+	
+	 public List<Mensaje> getMensajes() throws Exception {
+	        return mensajeLogic.getMensaje();
+	    }
+
+	@Override
+	public List<Mensaje> mensajesPorProyecto(Integer idProyecto) {
+		return mensajeLogic.mensajesPorProyecto(idProyecto);
 	}
 }

@@ -3,6 +3,7 @@ package com.coboard.presentation.businessDelegate;
 import com.coboard.modelo.Adjuntos;
 import com.coboard.modelo.Cargo;
 import com.coboard.modelo.Informacion;
+import com.coboard.modelo.Mensaje;
 import com.coboard.modelo.Proyecto;
 import com.coboard.modelo.Proyectousuario;
 import com.coboard.modelo.Sesion;
@@ -369,4 +370,10 @@ public interface IBusinessDelegatorView {
 	public List<Usuario> usuariosConectados(Proyecto proyecto);
 	
 	public List<VotosDTO> votosDeUsuarioPorProyecto(Proyecto proyecto, Usuario usuario);
+	
+	public void saveMensaje(Mensaje entity) throws Exception;
+	
+	public List<Mensaje> getMensajes() throws Exception;
+	
+	public List<Mensaje> mensajesPorProyecto(Integer idProyecto);
 }

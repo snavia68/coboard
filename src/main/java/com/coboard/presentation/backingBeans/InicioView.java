@@ -187,7 +187,7 @@ public String votarProyecto() throws Exception {
 		}
 		return "/index.xhtml";
 	}
-
+	
 	public List<Proyecto> getLosProyectos() {
 		if(losProyectos == null){
 			Usuario usu=(Usuario)FacesUtils.getfromSession("usuario");

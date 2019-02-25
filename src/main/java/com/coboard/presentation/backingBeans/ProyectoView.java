@@ -57,6 +57,7 @@ public class ProyectoView implements Serializable {
     private CommandButton btnModify;
     private CommandButton btnDelete;
     private CommandButton btnClear;
+    private CommandButton btnVideoCall;
     private SelectOneMenu somActiva;
     private SelectOneMenu somTipoProyecto;
     private List<ProyectoDTO> data;
@@ -463,7 +464,17 @@ public class ProyectoView implements Serializable {
 	public void setIdusuario(int idusuario) {
 		this.idusuario = idusuario;
 	}
+
+	public CommandButton getBtnVideoCall() {
+		return btnVideoCall;
+	}
+
+	public void setBtnVideoCall(CommandButton btnVideoCall) {
+		this.btnVideoCall = btnVideoCall;
+	}
 	
-	
+	public String videoCall() {
+		return "/coboard/src/main/webapp/videollamada.html";
+	}
 	
 }

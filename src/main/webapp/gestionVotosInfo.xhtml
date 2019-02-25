@@ -134,6 +134,13 @@
 	       							 #{usus.nombre}
 	    						</p:dataList>
 							</p:panel>
+							<p:separator></p:separator>
+							<div align="center">
+								<p:commandButton id="btnVideoCall" class="ui-button" value="Videollamada"
+										icon="fa fa-video-camera white" title="Videollamada"
+										action="www.google.com">
+								</p:commandButton>
+							</div>
 						</div>
 						<div class="ui-g-9">
 							<p:panel header="CoBoard Chat">
@@ -142,7 +149,6 @@
 										<p:repeat var="msj" value="#{proyectoView.losMensajes}">
 											<h:panelGrid columns="1" style="width:100%"
 												columnClasses="logo,detail">
-												
 													<p:outputPanel>
 														<h:panelGrid columns="2" cellpadding="5">
 															<h:outputText value="#{msj.usuario}:"
